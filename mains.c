@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <locale.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include "SDL2/SDL.h"
 unsigned long long PC;
 unsigned long long meml[97280];
@@ -155,7 +154,6 @@ int main(int argc, char *argv[]) {
 	window=SDL_CreateWindow("AOS-CVM", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 320, 240, SDL_WINDOW_INPUT_GRABBED|SDL_WINDOW_FULLSCREEN);
 	surface=SDL_GetWindowSurface(window);
 	while (1) {
-		printf("%llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu \n", PC, reg[240], reg[241], reg[242], reg[243], reg[244], reg[245], reg[246], reg[247], reg[248], reg[249], reg[250], reg[251], reg[252], reg[253], reg[254]);
 		fseek(files, 8*PC, SEEK_SET);
 		fread(lb, 1, 8, files);
 		for (i=0;i<8;i++) {
@@ -224,7 +222,6 @@ int main(int argc, char *argv[]) {
 				brncom(lb[1], lb[2], ((lb[3]<<24)+(lb[4]<<16)+(lb[5]<<8)+(lb[6]))%4294967296, lb[7]);
 				break;
 			case 15:
-				sleep(5);
 				SDL_Quit();
 				printf("%llu %s", instnum, " instructions executed.");
 				fclose(files);
