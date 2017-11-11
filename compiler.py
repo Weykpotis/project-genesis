@@ -993,7 +993,7 @@ if __name__=="__main__":
   syslib()
   extlib()
   init()
-  parse_rem(open('/Applications/AssemblyOS/alp/'+input('FILE NAME~')+'.alp').read())
+  parse_rem(open(input('FILE NAME~')+'.alp').read())
   for j in gotopos:
     i=gotopos[j]
     x=code[j]
@@ -1012,7 +1012,7 @@ if __name__=="__main__":
     else:
       code[j]+=' t1'+x[24]
   code=[i for i in code if i[0:4]!='LBL ']
-  file=open('/Applications/AssemblyOS/asa/'+input('OFILE NAME~')+'.asa', mode='w')
+  file=open(input('OFILE NAME~')+'.asa', mode='w')
   for i in code:
     file.write(i+'\n')
   file.close()
