@@ -6,7 +6,7 @@ class version():
     self.micro=0
     self.type='p'
     self.build=0
-    self.total='AssemblyOS Installer 1.0.0p'
+    self.total='Project Genesis Binary Reader'
 def alta(bytstr, point):
   global file
   file.seek(point)
@@ -35,8 +35,9 @@ def altex(read, point):
       point=point+8
 formatd=input('FORMAT?')
 a=time.time()
+disk=input('DISK~')+'.aod'
 if formatd:
-  file=open('/Applications/AssemblyOS/dt.aod', 'wb')
+  file=open(disk, 'wb')
   for i in range(int(formatd)*128):
     if i%8192==0:
       print(str(i//128)+' KB wiped.')
@@ -44,11 +45,11 @@ if formatd:
   print('Disk formatted.')
   file.seek(0)
   file.close()
-file=open('/Applications/AssemblyOS/dt.aod', 'rb+')
+file=open(disk, 'rb+')
 ######
-trl=open('/Applications/AssemblyOS/asm/window.asm', mode='r')
-altex(trl, 0)
-print('trl')
+fil=open(input('FILE~')+'.asm', mode='r')
+altex(fil, 0)
+print('fil')
 ######
 file.close()
 print('INSTALLATION COMPLETE in '+str(time.time()-a)+' seconds.')
