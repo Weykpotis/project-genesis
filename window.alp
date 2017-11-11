@@ -1,0 +1,91 @@
+DEF window.mkwindow(x, y, xsize, ysize) {
+	INT point
+	point=sys.malloc(5)
+	point[0]=x
+	point[1]=y
+	point[2]=xsize
+	point[3]=ysize
+	point[4]=sys.malloc(xsize*ysize)
+	RET point
+}
+DEF window.delwindow(point) {
+	sys.dalloc(point[4], point[2]*point[3])
+	sys.dalloc(point, 5)
+}
+DEF window.blitimgoff(img, point, xoff, yoff, xsize, ysize) {
+	pict.image(img, point[0]+xoff, point[1]+yoff, point[0]+xoff+xsize, point[1]+yoff+ysize)
+}
+DEF window.readevent(point) {
+	INT temp
+	INT return
+	INT xtemp
+	temp=pict.event()
+	1
+	ASM NEG rFE rFE
+	return=
+	IF temp>>60==5 {
+#KEYPRESS
+		return=sys.malloc(3)
+		return[0]=3
+		return[1]=5
+		return[2]=temp>>48-1280
+	}
+	IF temp>>60==4 {
+#KEY RELEASE
+		return=sys.malloc(3)
+		return[0]=3
+		return[1]=4
+		return[2]=temp>>48-1024
+	}
+	IF temp>>60==10 {
+#MOVE MOUSE
+		return=sys.malloc(4)
+		return[0]=4
+		return[1]=10
+		return[2]=temp>>40-10485760
+		return[3]=temp>>24%65536
+		IF temp>>59==21 {
+			return[3]
+			ASM NEG rFE rFE
+			return[3]=
+		}
+		IF temp>>58%2==1 {
+			return[2]
+			ASM NEG rFE rFE
+			return[2]=
+		}
+	}
+	IF temp>>60==8 {
+#MOUSE CLICK
+		return=sys.malloc(3)
+		return[0]=3
+		return[1]=5
+		return[2]=temp>>48-1280
+	}
+	IF temp>>60==9 {
+#MOUSE CLICK-RELEASE
+		return=sys.malloc(3)
+		return[0]=3
+		return[1]=4
+		return[2]=temp>>48-1024
+	}
+	IF temp>>60==12 {
+#MOVE MOUSE
+		return=sys.malloc(4)
+		return[0]=4
+		return[1]=10
+		return[2]=temp>>40-10485760
+		return[3]=temp>>24%65536
+		IF temp>>59==25 {
+			return[3]
+			ASM NEG rFE rFE
+			return[3]=
+		}
+		IF temp>>58%2==1 {
+			return[2]
+			ASM NEG rFE rFE
+			return[2]=
+		}
+	}
+	RET return
+}
