@@ -17,8 +17,8 @@ def linewrite(mode, string):
   st=st+'\n'
   asm.write(st)
 name=input('NAME~')
-asa=open('/Applications/AssemblyOS/asa/'+name+'.asa')
-asm=open('/Applications/AssemblyOS/asm/'+name+'.asm', mode='w')
+asa=open(name+'.asa')
+asm=open(name+'.asm', mode='w')
 chars=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
 funcs={'LDR':'00', 'STM':'01', 'LDA':'02', 'STA':'03', 'LDM':'04', 'STD':'05', 'LDB':'06', 'STB':'07',
        'RCV':'08', 'SND':'09', 'RCA':'0A', 'SNA':'0B', 'ACC':'0C', 'EQU':'0D', 'BRN':'0E', 'TRM':'0F',
